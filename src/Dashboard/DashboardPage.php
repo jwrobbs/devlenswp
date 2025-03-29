@@ -137,9 +137,6 @@ class DashboardPage {
 
 		$final_css = '<style>' . $dashboard_css . $section_css . '</style>';
 
-		\error_log( 'add custom css triggered' );
-		\error_log( $final_css ); //phpcs:ignore
-
 		echo $final_css; //phpcs:ignore
 	}
 }
