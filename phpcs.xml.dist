@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<ruleset name="Project Rules">
+    <description>Custom PHPCS rules for PCE</description>
+
+    <!-- Include all WordPress Coding Standards -->
+    <rule ref="WordPress"/>
+
+    <!-- Disable the filename rule -->
+    <rule ref="WordPress.Files.FileName">
+        <severity>0</severity>
+    </rule>
+
+    <exclude-pattern>vendor/**</exclude-pattern>
+</ruleset>

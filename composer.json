@@ -1,0 +1,20 @@
+{
+	"name": "jwrobbs/devlenswp",
+	"type": "wordpress-plugin",
+	"license": "Unlicense",
+	"version": "0.1.0",
+	"autoload": {
+		"psr-4": {
+			"Devlens\\": "src/",
+			"Devlens_Common\\": "common/"
+		}
+	},
+	"authors": [
+		{
+			"name": "Josh Robbs",
+			"email": "josh@joshrobbs.com"
+		}
+	],
+	"minimum-stability": "stable",
+	"require": {}
+}
