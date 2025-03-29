@@ -31,6 +31,7 @@ class ComposerStaticInit79cef6dd7b79c81e8272714ae848490a
         'Devlens\\Dashboard\\Sections\\AbstractModule' => __DIR__ . '/../..' . '/src/Dashboard/Sections/AbstractModule.php',
         'Devlens\\Dashboard\\Sections\\PluginsModule' => __DIR__ . '/../..' . '/src/Dashboard/Sections/PluginsModule.php',
         'Devlens\\Dashboard\\Sections\\Section' => __DIR__ . '/../..' . '/src/Dashboard/Sections/Section.php',
+        'Devlens\\Dashboard\\Sections\\SecurityModule' => __DIR__ . '/../..' . '/src/Dashboard/Sections/SecurityModule.php',
         'Devlens\\Dashboard\\Sections\\ServerModule' => __DIR__ . '/../..' . '/src/Dashboard/Sections/ServerModule.php',
         'Devlens\\Dashboard\\Sections\\ThemesModule' => __DIR__ . '/../..' . '/src/Dashboard/Sections/ThemesModule.php',
         'Devlens\\Dashboard\\Sections\\UsersModule' => __DIR__ . '/../..' . '/src/Dashboard/Sections/UsersModule.php',

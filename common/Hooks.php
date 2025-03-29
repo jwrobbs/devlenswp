@@ -9,6 +9,7 @@ namespace Devlens_Common;
 
 use Devlens\Dashboard\DashboardPage;
 use Devlens\Dashboard\Sections\PluginsModule;
+use Devlens\Dashboard\Sections\SecurityModule;
 use Devlens\Dashboard\Sections\ServerModule;
 use Devlens\Dashboard\Sections\ThemesModule;
 use Devlens\Dashboard\Sections\UsersModule;
@@ -31,5 +32,6 @@ class Hooks {
 		UsersModule::init();
 		PluginsModule::init();
 		ThemesModule::init();
+		SecurityModule::init();
 	}
 }

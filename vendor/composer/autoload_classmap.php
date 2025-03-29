@@ -11,6 +11,7 @@ return array(
     'Devlens\\Dashboard\\Sections\\AbstractModule' => $baseDir . '/src/Dashboard/Sections/AbstractModule.php',
     'Devlens\\Dashboard\\Sections\\PluginsModule' => $baseDir . '/src/Dashboard/Sections/PluginsModule.php',
     'Devlens\\Dashboard\\Sections\\Section' => $baseDir . '/src/Dashboard/Sections/Section.php',
+    'Devlens\\Dashboard\\Sections\\SecurityModule' => $baseDir . '/src/Dashboard/Sections/SecurityModule.php',
     'Devlens\\Dashboard\\Sections\\ServerModule' => $baseDir . '/src/Dashboard/Sections/ServerModule.php',
     'Devlens\\Dashboard\\Sections\\ThemesModule' => $baseDir . '/src/Dashboard/Sections/ThemesModule.php',
     'Devlens\\Dashboard\\Sections\\UsersModule' => $baseDir . '/src/Dashboard/Sections/UsersModule.php',
