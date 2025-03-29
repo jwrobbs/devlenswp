@@ -1,8 +1,8 @@
 <?php
 /**
- * Server Module
+ * Themes Module
  *
- * Displays server data in the WordPress admin dashboard widget.
+ * Displays themes data in the WordPress admin dashboard widget.
  *
  * @package DevLensWP
  */
@@ -12,32 +12,32 @@ namespace Devlens\Dashboard\Sections;
 defined( 'ABSPATH' ) || exit;
 
 /**
- * Server Module Class
+ * Themes Module Class
  */
-class ServerModule extends AbstractModule {
+class ThemesModule extends AbstractModule {
 
 
 	/**
-	 * Generate the server data section
+	 * Generate the themes data section
 	 *
 	 * @param array $sections The sections.
 	 * @return array
 	 */
 	public static function generate_section( $sections ) {
 
-		$env_data = self::get_server_data(); // Get the server data.
+		$env_data = self::get_themes_data(); // Get the themes data.
 
 		// $content = '<ul class="admin-tools-dashboard-widget_list">'; // Initialize content variable.
 		// foreach ( $env_data as $key => $value ) {
-		// Build the content string with server data.
+		// Build the content string with themes data.
 		// $content .= '<li><strong>' . esc_html( $key ) . ':</strong> ' . esc_html( $value ) . '</li>';
 		// }
 		// $content .= '</ul>'; // Close the unordered list.
 
 		$section = new Section(
-			title: 'Server Data',
+			title: 'Themes Data',
 			data: $env_data, // Content will be generated in the render_section method.
-			css_id: 'server-data-section' // CSS ID for the section.
+			css_id: 'themes-data-section' // CSS ID for the section.
 		);
 
 		$sections[] = $section;
@@ -52,7 +52,7 @@ class ServerModule extends AbstractModule {
 	 */
 	public static function add_cssx( $widget_css ) {
 		$css = <<<HTML
-			#server-data-section {
+			#themes-data-section {
 				ul {
 				columns: 2;
 				margin: 0;
@@ -69,10 +69,11 @@ class ServerModule extends AbstractModule {
 	}
 
 	/**
-	 * Get server data
-	 * Creates and returns an array of server data such as:
+	 * Get themes data
+	 * Creates and returns an array of themes data such as:
 	 * - PHP version
-	 * - Server software
+	 * - WordPress version
+	 * - Themes software
 	 * - MySQL version
 	 * - PHP memory limit
 	 * - PHP max execution time
@@ -86,22 +87,36 @@ class ServerModule extends AbstractModule {
 	 *
 	 * @return array
 	 */
-	public static function get_server_data() {
-		$server_info = $GLOBALS['wpdb']->get_var( 'SELECT VERSION()' );
-		if ( stripos( $server_info, 'mariadb' ) !== false ) {
+	public static function get_themes_data() {
+		$themes_info = $GLOBALS['wpdb']->get_var( 'SELECT VERSION()' );
+		if ( stripos( $themes_info, 'mariadb' ) !== false ) {
 			$type = 'MariaDB';
 		} else {
 			$type = 'MySQL';
 		}
 
-		$server_data = array(
+		include_once ABSPATH . 'wp-admin/includes/update.php';
+		$updates = get_core_updates();
+
+		if ( ! empty( $updates ) && 'upgrade' === $updates[0]->response ) {
+			$wp_score = 'red';
+		} else {
+			$wp_score = 'green';
+		}
+
+		$themes_data = array(
 			array(
 				'label' => 'PHP Version',
 				'value' => phpversion(),
 				'score' => version_compare( PHP_VERSION, '8.0.0' ) >= 0 ? 'green' : 'red',
 			),
 			array(
-				'label' => 'Server Software',
+				'label' => 'WordPress Version',
+				'value' => get_bloginfo( 'version' ),
+				'score' => $wp_score,
+			),
+			array(
+				'label' => 'Themes Software',
 			'value' => $_SERVER['SERVER_SOFTWARE'], // phpcs:ignore
 			'score'     => false,
 			),
@@ -142,6 +157,6 @@ class ServerModule extends AbstractModule {
 			),
 		);
 
-		return $server_data;
+		return $themes_data;
 	}
 }
