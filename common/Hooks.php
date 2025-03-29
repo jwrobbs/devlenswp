@@ -8,6 +8,7 @@
 namespace Devlens_Common;
 
 use Devlens\Dashboard\DashboardPage;
+use Devlens\Dashboard\Sections\ServerModule;
 
 defined( 'ABSPATH' ) || exit;
 
@@ -20,5 +21,7 @@ class Hooks {
 	 */
 	public static function init() {
 		DashboardPage::init();
+
+		ServerModule::init();
 	}
 }

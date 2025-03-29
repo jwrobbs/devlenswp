@@ -8,5 +8,8 @@ $baseDir = dirname($vendorDir);
 return array(
     'Composer\\InstalledVersions' => $vendorDir . '/composer/InstalledVersions.php',
     'Devlens\\Dashboard\\DashboardPage' => $baseDir . '/src/Dashboard/DashboardPage.php',
+    'Devlens\\Dashboard\\Sections\\AbstractModule' => $baseDir . '/src/Dashboard/Sections/AbstractModule.php',
+    'Devlens\\Dashboard\\Sections\\Section' => $baseDir . '/src/Dashboard/Sections/Section.php',
+    'Devlens\\Dashboard\\Sections\\ServerModule' => $baseDir . '/src/Dashboard/Sections/ServerModule.php',
     'Devlens_Common\\Hooks' => $baseDir . '/common/Hooks.php',
 );

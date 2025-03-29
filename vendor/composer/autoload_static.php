@@ -28,6 +28,9 @@ class ComposerStaticInit79cef6dd7b79c81e8272714ae848490a
     public static $classMap = array (
         'Composer\\InstalledVersions' => __DIR__ . '/..' . '/composer/InstalledVersions.php',
         'Devlens\\Dashboard\\DashboardPage' => __DIR__ . '/../..' . '/src/Dashboard/DashboardPage.php',
+        'Devlens\\Dashboard\\Sections\\AbstractModule' => __DIR__ . '/../..' . '/src/Dashboard/Sections/AbstractModule.php',
+        'Devlens\\Dashboard\\Sections\\Section' => __DIR__ . '/../..' . '/src/Dashboard/Sections/Section.php',
+        'Devlens\\Dashboard\\Sections\\ServerModule' => __DIR__ . '/../..' . '/src/Dashboard/Sections/ServerModule.php',
         'Devlens_Common\\Hooks' => __DIR__ . '/../..' . '/common/Hooks.php',
     );
 
