@@ -1,0 +1,38 @@
+$font-size: 16px;
+
+.devlenswp-section-list-wrapper {
+	margin-top: 2rem;
+	font-size: $font-size;
+	display: grid;
+	grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+
+	> *:nth-child(odd) {
+		background: #ddd;
+	}
+
+	div {
+		border: 1px solid #ddd;
+		display: grid;
+		grid-template-columns: auto 20px;
+		margin: 0;
+		padding: 0.5em;
+
+		.indicator {
+			text-align: right;
+			font-size: 2rem;
+			line-height: 0.3;
+			align-items: center;
+		}
+	}
+}
+
+.debug-log-section {
+	font-size: $font-size;
+
+	.debug-log-section__content {
+		display: flex;
+		> *:not(:last-child) {
+			margin-right: $font-size * 2;
+		}
+	}
+}

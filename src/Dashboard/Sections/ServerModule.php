@@ -140,8 +140,13 @@ class ServerModule extends AbstractModule {
 				'value' => ini_get( 'max_file_uploads' ),
 				'score' => false,
 			),
+			array(
+				'label' => 'Object Cache Enabled',
+				'value' => wp_using_ext_object_cache() ? 'Yes' : 'No',
+				'score' => wp_using_ext_object_cache() ? 'green' : 'orange',
+			),
 		);
 
-		return $server_data;
+			return $server_data;
 	}
 }

@@ -25,18 +25,11 @@ class PluginsModule extends AbstractModule {
 	 */
 	public static function generate_section( $sections ) {
 
-		$env_data = self::get_plugins_data(); // Get the plugin data.
-
-		// $content = '<ul class="admin-tools-dashboard-widget_list">'; // Initialize content variable.
-		// foreach ( $env_data as $key => $value ) {
-		// Build the content string with plugin data.
-		// $content .= '<li><strong>' . esc_html( $key ) . ':</strong> ' . esc_html( $value ) . '</li>';
-		// }
-		// $content .= '</ul>'; // Close the unordered list.
+		$data = self::get_plugins_data(); // Get the plugin data.
 
 		$section = new Section(
 			title: 'Plugins Data',
-			data: $env_data, // Content will be generated in the render_section method.
+			data: $data, // Content will be generated in the render_section method.
 			css_id: 'plugins-data-section' // CSS ID for the section.
 		);
 

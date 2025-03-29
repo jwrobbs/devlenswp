@@ -105,9 +105,14 @@ class WordPressModule extends AbstractModule {
 				'value' => is_multisite() ? 'Yes' : 'No',
 				'score' => false,
 			),
+			array(
+				'label' => 'Revision Limit',
+				'value' => WP_POST_REVISIONS,
+				'score' => 5 < WP_POST_REVISIONS ? 'red' : 'green',
+			),
 		);
 
-		return $server_data;
+			return $server_data;
 	}
 
 	/**

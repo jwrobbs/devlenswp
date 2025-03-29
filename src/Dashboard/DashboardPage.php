@@ -18,7 +18,26 @@ class DashboardPage {
 	 */
 	public static function init() {
 		add_action( 'admin_menu', array( static::class, 'add_menu_page' ) );
-		add_action( 'admin_head', array( self::class, 'add_custom_css' ) );
+		add_action( 'admin_enqueue_scripts', array( static::class, 'enqueue_styles' ) );
+	}
+
+	/**
+	 * Enqueue styles for the dashboard page.
+	 *
+	 * @param string $hook The current admin page hook.
+	 */
+	public static function enqueue_styles( $hook ) {
+		$hook;
+		$screen = get_current_screen();
+
+		if ( $screen && 'toplevel_page_devlenswp-dashboard' === $screen->id ) {
+			wp_enqueue_style(
+				'devlenswp-dashboard',
+				DEVLENS_PLUGIN_URL . 'assets/css/style.css',
+				array(),
+				'1.0'
+			);
+		}
 	}
 
 	/**
@@ -51,15 +70,15 @@ class DashboardPage {
 
 		$html = '';
 
-		$html .= '<div class="devlenswp-section-wrapper">';
-		$html .= '<ul>';
+		$html .= '<div class="devlenswp-section-list-wrapper">';
 		foreach ( $sections as $section ) {
 			$html .= self::render_section_data( $section->data );
 		}
 
 		echo wp_kses_post( $html );
-		echo '</ul>'; // Close unordered list.
 		echo '</div><!-- end of wrapper -->'; // Close wrap.
+
+		DebugLogSection::render_section();
 	}
 
 	/**
@@ -75,7 +94,7 @@ class DashboardPage {
 		$html = '';
 
 		foreach ( $data as $item ) {
-			$html .= '<li>';
+			$html .= '<div>';
 			$html .= "<span>{$item['label']}: {$item['value']}</span>";
 
 			if ( ! $item['score'] ) {
@@ -87,7 +106,7 @@ class DashboardPage {
 			}
 
 			$html .= "<span class='indicator' {$level}>{$result}</span>";
-			$html .= '</li>';
+			$html .= '</div>';
 		}
 
 		return $html;
@@ -98,30 +117,7 @@ class DashboardPage {
 	 */
 	public static function add_custom_css() {
 		$dashboard_css = <<<HTML
-		.devlenswp-section-wrapper {
-			font-size: 18px;
-			
-			ul {
-				max-width: 300px;
-				border: 1px solid #ddd;
-				li {
-					display: grid;
-						grid-template-columns: auto 20px;
-						padding: .5rem .5rem;
-						margin:0;
-					
-					.indicator {
-						text-align: right;
-						font-size: 2rem;
-						line-height: .3;
-						align-items: center;
-					}
-				}
-				li:nth-of-type(even) {
-					background-color: #ddd;
-				}
-			}
-		}
+		
 		HTML;
 		$section_css   = apply_filters( 'devlenswp_custom_css', '' );
 
