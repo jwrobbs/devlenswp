@@ -10,6 +10,8 @@ namespace Devlens_Common;
 use Devlens\Dashboard\DashboardPage;
 use Devlens\Dashboard\Sections\PluginsModule;
 use Devlens\Dashboard\Sections\ServerModule;
+use Devlens\Dashboard\Sections\ThemesModule;
+use Devlens\Dashboard\Sections\UsersModule;
 use Devlens\Dashboard\Sections\WordPressModule;
 
 defined( 'ABSPATH' ) || exit;
@@ -26,6 +28,8 @@ class Hooks {
 
 		ServerModule::init();
 		WordPressModule::init();
+		UsersModule::init();
 		PluginsModule::init();
+		ThemesModule::init();
 	}
 }

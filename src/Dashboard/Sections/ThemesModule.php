@@ -25,18 +25,11 @@ class ThemesModule extends AbstractModule {
 	 */
 	public static function generate_section( $sections ) {
 
-		$env_data = self::get_themes_data(); // Get the themes data.
-
-		// $content = '<ul class="admin-tools-dashboard-widget_list">'; // Initialize content variable.
-		// foreach ( $env_data as $key => $value ) {
-		// Build the content string with themes data.
-		// $content .= '<li><strong>' . esc_html( $key ) . ':</strong> ' . esc_html( $value ) . '</li>';
-		// }
-		// $content .= '</ul>'; // Close the unordered list.
+		$data = self::get_themes_data(); // Get the themes data.
 
 		$section = new Section(
 			title: 'Themes Data',
-			data: $env_data, // Content will be generated in the render_section method.
+			data: $data, // Content will be generated in the render_section method.
 			css_id: 'themes-data-section' // CSS ID for the section.
 		);
 
@@ -51,112 +44,73 @@ class ThemesModule extends AbstractModule {
 	 * @return string
 	 */
 	public static function add_cssx( $widget_css ) {
-		$css = <<<HTML
-			#themes-data-section {
-				ul {
-				columns: 2;
-				margin: 0;
-				}
-				li {
-					font-size: .8rem;
-					line-height: 1.2;
-					margin: 0 0 .5em;
-				}
-			}
-		HTML;
-
-		return $widget_css . $css;
+		return $widget_css;
 	}
 
 	/**
 	 * Get themes data
 	 * Creates and returns an array of themes data such as:
-	 * - PHP version
-	 * - WordPress version
-	 * - Themes software
-	 * - MySQL version
-	 * - PHP memory limit
-	 * - PHP max execution time
-	 * - PHP max input time
-	 * - PHP post max size
-	 * - PHP upload max size
-	 * - PHP max file uploads
-	 * - PHP max input vars
-	 * - PHP display errors
-	 * - PHP error reporting
+	 * - Total themes
+	 * - Inactive theme count
+	 * - Current theme name
+	 * - Current theme is child
+	 * - Count of themes with updates
 	 *
 	 * @return array
 	 */
 	public static function get_themes_data() {
-		$themes_info = $GLOBALS['wpdb']->get_var( 'SELECT VERSION()' );
-		if ( stripos( $themes_info, 'mariadb' ) !== false ) {
-			$type = 'MariaDB';
-		} else {
-			$type = 'MySQL';
-		}
-
-		include_once ABSPATH . 'wp-admin/includes/update.php';
-		$updates = get_core_updates();
-
-		if ( ! empty( $updates ) && 'upgrade' === $updates[0]->response ) {
-			$wp_score = 'red';
-		} else {
-			$wp_score = 'green';
-		}
 
 		$themes_data = array(
 			array(
-				'label' => 'PHP Version',
-				'value' => phpversion(),
-				'score' => version_compare( PHP_VERSION, '8.0.0' ) >= 0 ? 'green' : 'red',
-			),
-			array(
-				'label' => 'WordPress Version',
-				'value' => get_bloginfo( 'version' ),
-				'score' => $wp_score,
-			),
-			array(
-				'label' => 'Themes Software',
-			'value' => $_SERVER['SERVER_SOFTWARE'], // phpcs:ignore
-			'score'     => false,
-			),
-			array(
-				'label' => "$type Version",
-				'value' => $GLOBALS['wpdb']->db_version(),
+				'label' => 'Total Themes',
+				'value' => count( wp_get_themes() ),
 				'score' => false,
 			),
 			array(
-				'label' => 'PHP Memory Limit',
-				'value' => ini_get( 'memory_limit' ),
+				'label' => 'Current Theme',
+				'value' => wp_get_theme()->get( 'Name' ),
 				'score' => false,
 			),
 			array(
-				'label' => 'PHP Max Execution Time',
-				'value' => ini_get( 'max_execution_time' ),
+				'label' => 'Current Theme Version',
+				'value' => wp_get_theme()->get( 'Version' ),
 				'score' => false,
 			),
 			array(
-				'label' => 'PHP Max Input Time',
-				'value' => ini_get( 'max_input_time' ),
+				'label' => 'Current Theme is Child',
+				'value' => wp_get_theme()->parent() ? 'Yes' : 'No',
 				'score' => false,
 			),
 			array(
-				'label' => 'PHP Post Max Size',
-				'value' => ini_get( 'post_max_size' ),
+				'label' => 'Themes with Updates',
+				'value' => self::wp_get_themes_with_updates(),
 				'score' => false,
 			),
-			array(
-				'label' => 'PHP Upload Max Size',
-				'value' => ini_get( 'upload_max_filesize' ),
-				'score' => false,
-			),
-			array(
-				'label' => 'PHP Max File Uploads',
-				'value' => ini_get( 'max_file_uploads' ),
-				'score' => false,
-			),
+
 		);
 
 		return $themes_data;
+	}
+
+	/**
+	 * Get themes with updates
+	 *
+	 * @return int
+	 */
+	public static function wp_get_themes_with_updates() {
+		$update_data   = wp_get_themes();
+		$theme_updates = get_site_transient( 'update_themes' );
+
+		$count = 0;
+
+		foreach ( $update_data as $slug => $theme ) {
+			if (
+			isset( $theme_updates->response[ $slug ] )
+			&& version_compare( $theme->get( 'Version' ), $theme_updates->response[ $slug ]['new_version'], '<' )
+			) {
+				++$count;
+			}
+		}
+		return $count;
 	}
 }

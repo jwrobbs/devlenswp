@@ -33,6 +33,7 @@ class ComposerStaticInit79cef6dd7b79c81e8272714ae848490a
         'Devlens\\Dashboard\\Sections\\Section' => __DIR__ . '/../..' . '/src/Dashboard/Sections/Section.php',
         'Devlens\\Dashboard\\Sections\\ServerModule' => __DIR__ . '/../..' . '/src/Dashboard/Sections/ServerModule.php',
         'Devlens\\Dashboard\\Sections\\ThemesModule' => __DIR__ . '/../..' . '/src/Dashboard/Sections/ThemesModule.php',
+        'Devlens\\Dashboard\\Sections\\UsersModule' => __DIR__ . '/../..' . '/src/Dashboard/Sections/UsersModule.php',
         'Devlens\\Dashboard\\Sections\\WordPressModule' => __DIR__ . '/../..' . '/src/Dashboard/Sections/WordPressModule.php',
         'Devlens_Common\\Hooks' => __DIR__ . '/../..' . '/common/Hooks.php',
     );

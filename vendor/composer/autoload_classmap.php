@@ -13,6 +13,7 @@ return array(
     'Devlens\\Dashboard\\Sections\\Section' => $baseDir . '/src/Dashboard/Sections/Section.php',
     'Devlens\\Dashboard\\Sections\\ServerModule' => $baseDir . '/src/Dashboard/Sections/ServerModule.php',
     'Devlens\\Dashboard\\Sections\\ThemesModule' => $baseDir . '/src/Dashboard/Sections/ThemesModule.php',
+    'Devlens\\Dashboard\\Sections\\UsersModule' => $baseDir . '/src/Dashboard/Sections/UsersModule.php',
     'Devlens\\Dashboard\\Sections\\WordPressModule' => $baseDir . '/src/Dashboard/Sections/WordPressModule.php',
     'Devlens_Common\\Hooks' => $baseDir . '/common/Hooks.php',
 );

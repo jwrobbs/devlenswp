@@ -51,18 +51,15 @@ class DashboardPage {
 
 		$html = '';
 
+		$html .= '<div class="devlenswp-section-wrapper">';
+		$html .= '<ul>';
 		foreach ( $sections as $section ) {
-			$html .= '<div class="devlenswp-section" id="' . $section->css_id . '">';
-			$html .= '<h2>' . $section->title . '</h2>';
-			$html .= '<div class="devlenswp-section-content">';
 			$html .= self::render_section_data( $section->data );
-			$html .= '</div>'; // Close section content.
-			$html .= '</div>'; // Close section.
 		}
 
 		echo wp_kses_post( $html );
-
-		echo '</div>';
+		echo '</ul>'; // Close unordered list.
+		echo '</div><!-- end of wrapper -->'; // Close wrap.
 	}
 
 	/**
@@ -72,11 +69,10 @@ class DashboardPage {
 	 * @return string
 	 */
 	public static function render_section_data( $data ) {
-		if ( 1 > count( $data ) ) {
+		if ( isset( $data ) && 1 > count( $data ) ) {
 			return '';
 		}
-
-		$html = '<ul class="devlenswp-section-data">';
+		$html = '';
 
 		foreach ( $data as $item ) {
 			$html .= '<li>';
@@ -94,7 +90,6 @@ class DashboardPage {
 			$html .= '</li>';
 		}
 
-		$html .= '</ul>'; // Close unordered list.
 		return $html;
 	}
 
@@ -103,33 +98,28 @@ class DashboardPage {
 	 */
 	public static function add_custom_css() {
 		$dashboard_css = <<<HTML
-		.devlenswp-section-content {
-			display: grid;
-			grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-			gap: 1rem;
-		}
-		.devlenswp-section-data {
-			padding: 0;
-			margin: 0;
-			border: 1px solid #000;
-			width: auto;
-			max-width: 250px;
-
-			li {
-				display: grid;
-				grid-template-columns: auto 20px;
-				padding: .2rem .5rem;
-				margin:0;
-
-				.indicator {
-					text-align: right;
-					font-size: 2rem;
-					line-height: .3;
-					align-items: center;
+		.devlenswp-section-wrapper {
+			font-size: 18px;
+			
+			ul {
+				max-width: 300px;
+				border: 1px solid #ddd;
+				li {
+					display: grid;
+						grid-template-columns: auto 20px;
+						padding: .5rem .5rem;
+						margin:0;
+					
+					.indicator {
+						text-align: right;
+						font-size: 2rem;
+						line-height: .3;
+						align-items: center;
+					}
 				}
-			}
-			li:nth-of-type(even) {
-				background-color: #ddd;
+				li:nth-of-type(even) {
+					background-color: #ddd;
+				}
 			}
 		}
 		HTML;

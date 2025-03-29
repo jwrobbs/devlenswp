@@ -71,90 +71,70 @@ class PluginsModule extends AbstractModule {
 	/**
 	 * Get plugins data
 	 * Creates and returns an array of plugins data such as:
-	 * - PHP version
-	 * - WordPress version
-	 * - Plugins software
-	 * - MySQL version
-	 * - PHP memory limit
-	 * - PHP max execution time
-	 * - PHP max input time
-	 * - PHP post max size
-	 * - PHP upload max size
-	 * - PHP max file uploads
-	 * - PHP max input vars
-	 * - PHP display errors
-	 * - PHP error reporting
+	 * - Total plugins
+	 * - Active plugins
+	 * - Inactive plugins
+	 * - Plugins with updates
 	 *
 	 * @return array
 	 */
 	public static function get_plugins_data() {
-		$plugins_info = $GLOBALS['wpdb']->get_var( 'SELECT VERSION()' );
-		if ( stripos( $plugins_info, 'mariadb' ) !== false ) {
-			$type = 'MariaDB';
-		} else {
-			$type = 'MySQL';
+		$all_plugins    = get_plugins();
+		$active_plugins = get_option( 'active_plugins', array() );
+		$update_plugins = get_site_transient( 'update_plugins' );
+		$total          = count( $all_plugins );
+		$active         = count( $active_plugins );
+		$inactive       = $total - $active;
+		$needs_update   = 0;
+
+		switch ( $inactive ) {
+			case 5 < $inactive:
+				$inactive_score = 'orange';
+				break;
+			case 10 < $inactive:
+				$inactive_score = 'red';
+				break;
+			default:
+				$inactive_score = 'green';
+				break;
 		}
 
-		include_once ABSPATH . 'wp-admin/includes/update.php';
-		$updates = get_core_updates();
-
-		if ( ! empty( $updates ) && 'upgrade' === $updates[0]->response ) {
-			$wp_score = 'red';
-		} else {
-			$wp_score = 'green';
+		foreach ( $all_plugins as $plugin_file => $plugin_data ) {
+			if ( isset( $update_plugins->response[ $plugin_file ] ) ) {
+				++$needs_update;
+			}
 		}
 
-		$plugin_data = array(
+		if ( 0 === $needs_update ) {
+			$needs_update_score = 'green';
+		} elseif ( 1 <= $needs_update ) {
+			$needs_update_score = 'orange';
+		} else {
+			$needs_update_score = 'red';
+		}
+
+		$plugins_data = array(
 			array(
-				'label' => 'PHP Version',
-				'value' => phpversion(),
-				'score' => version_compare( PHP_VERSION, '8.0.0' ) >= 0 ? 'green' : 'red',
-			),
-			array(
-				'label' => 'WordPress Version',
-				'value' => get_bloginfo( 'version' ),
-				'score' => $wp_score,
-			),
-			array(
-				'label' => 'Plugins Software',
-			'value' => $_SERVER['SERVER_SOFTWARE'], // phpcs:ignore
-			'score'     => false,
-			),
-			array(
-				'label' => "$type Version",
-				'value' => $GLOBALS['wpdb']->db_version(),
+				'label' => 'Total Plugins',
+				'value' => $total,
 				'score' => false,
 			),
 			array(
-				'label' => 'PHP Memory Limit',
-				'value' => ini_get( 'memory_limit' ),
+				'label' => 'Active Plugins',
+				'value' => $active,
 				'score' => false,
 			),
 			array(
-				'label' => 'PHP Max Execution Time',
-				'value' => ini_get( 'max_execution_time' ),
-				'score' => false,
+				'label' => 'Inactive Plugins',
+				'value' => $inactive,
+				'score' => $inactive_score,
 			),
 			array(
-				'label' => 'PHP Max Input Time',
-				'value' => ini_get( 'max_input_time' ),
-				'score' => false,
+				'label' => 'Plugins with Updates',
+				'value' => $needs_update,
+				'score' => $needs_update_score,
 			),
-			array(
-				'label' => 'PHP Post Max Size',
-				'value' => ini_get( 'post_max_size' ),
-				'score' => false,
-			),
-			array(
-				'label' => 'PHP Upload Max Size',
-				'value' => ini_get( 'upload_max_filesize' ),
-				'score' => false,
-			),
-			array(
-				'label' => 'PHP Max File Uploads',
-				'value' => ini_get( 'max_file_uploads' ),
-				'score' => false,
-			),
+
 		);
 
 		return $plugins_data;
