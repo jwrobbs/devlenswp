@@ -26,10 +26,11 @@ $font-size: 16px;
 	}
 }
 
-.debug-log-section {
+.debug-log-section,
+.uploads-section {
 	font-size: $font-size;
 
-	.debug-log-section__content {
+	.content {
 		display: flex;
 		> *:not(:last-child) {
 			margin-right: $font-size * 2;

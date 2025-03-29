@@ -79,6 +79,7 @@ class DashboardPage {
 		echo '</div><!-- end of wrapper -->'; // Close wrap.
 
 		DebugLogSection::render_section();
+		UploadsSection::render_section();
 	}
 
 	/**

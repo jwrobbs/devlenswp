@@ -47,15 +47,15 @@ class DebugLogSection {
 		$html = <<<HTML
 		<div class="debug-log-section">
 			<h3>Debug Log Data</h3>
-			<div class='debug-log-section__content'>
-				<div class='debug-log-section__overview'>
+			<div class='content'>
+				<div class='overview'>
 					<ul>
 						<li><strong>Debug Status:</strong> $debug_status</li>
 						<li><strong>Debug Log Status:</strong> $debug_log_status</li>
 						<li><strong>Debug Display Status:</strong> $debug_display_status</li>
 					</ul>
 				</div><!-- .debug-log-section__overview -->
-				<div class='debug-log-section__file-data'>
+				<div class='file-data'>
 					$file_list
 				</div><!-- .debug-log-section__file-data -->
 			</div><!-- .debug-log-section__content -->

@@ -21,12 +21,15 @@
   align-items: center;
 }
 
-.debug-log-section {
+.debug-log-section,
+.uploads-section {
   font-size: 16px;
 }
-.debug-log-section .debug-log-section__content {
+.debug-log-section .content,
+.uploads-section .content {
   display: flex;
 }
-.debug-log-section .debug-log-section__content > *:not(:last-child) {
+.debug-log-section .content > *:not(:last-child),
+.uploads-section .content > *:not(:last-child) {
   margin-right: 32px;
 }/*# sourceMappingURL=style.css.map */

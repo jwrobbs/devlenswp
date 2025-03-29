@@ -28,6 +28,7 @@ class ComposerStaticInit79cef6dd7b79c81e8272714ae848490a
     public static $classMap = array (
         'Composer\\InstalledVersions' => __DIR__ . '/..' . '/composer/InstalledVersions.php',
         'Devlens\\Dashboard\\DashboardPage' => __DIR__ . '/../..' . '/src/Dashboard/DashboardPage.php',
+        'Devlens\\Dashboard\\DebugLogSection' => __DIR__ . '/../..' . '/src/Dashboard/DebugLogSection.php',
         'Devlens\\Dashboard\\Sections\\AbstractModule' => __DIR__ . '/../..' . '/src/Dashboard/Sections/AbstractModule.php',
         'Devlens\\Dashboard\\Sections\\PluginsModule' => __DIR__ . '/../..' . '/src/Dashboard/Sections/PluginsModule.php',
         'Devlens\\Dashboard\\Sections\\Section' => __DIR__ . '/../..' . '/src/Dashboard/Sections/Section.php',
@@ -36,6 +37,7 @@ class ComposerStaticInit79cef6dd7b79c81e8272714ae848490a
         'Devlens\\Dashboard\\Sections\\ThemesModule' => __DIR__ . '/../..' . '/src/Dashboard/Sections/ThemesModule.php',
         'Devlens\\Dashboard\\Sections\\UsersModule' => __DIR__ . '/../..' . '/src/Dashboard/Sections/UsersModule.php',
         'Devlens\\Dashboard\\Sections\\WordPressModule' => __DIR__ . '/../..' . '/src/Dashboard/Sections/WordPressModule.php',
+        'Devlens\\Dashboard\\UploadsSection' => __DIR__ . '/../..' . '/src/Dashboard/UploadsSection.php',
         'Devlens_Common\\Hooks' => __DIR__ . '/../..' . '/common/Hooks.php',
     );
 

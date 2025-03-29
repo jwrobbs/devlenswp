@@ -8,6 +8,7 @@ $baseDir = dirname($vendorDir);
 return array(
     'Composer\\InstalledVersions' => $vendorDir . '/composer/InstalledVersions.php',
     'Devlens\\Dashboard\\DashboardPage' => $baseDir . '/src/Dashboard/DashboardPage.php',
+    'Devlens\\Dashboard\\DebugLogSection' => $baseDir . '/src/Dashboard/DebugLogSection.php',
     'Devlens\\Dashboard\\Sections\\AbstractModule' => $baseDir . '/src/Dashboard/Sections/AbstractModule.php',
     'Devlens\\Dashboard\\Sections\\PluginsModule' => $baseDir . '/src/Dashboard/Sections/PluginsModule.php',
     'Devlens\\Dashboard\\Sections\\Section' => $baseDir . '/src/Dashboard/Sections/Section.php',
@@ -16,5 +17,6 @@ return array(
     'Devlens\\Dashboard\\Sections\\ThemesModule' => $baseDir . '/src/Dashboard/Sections/ThemesModule.php',
     'Devlens\\Dashboard\\Sections\\UsersModule' => $baseDir . '/src/Dashboard/Sections/UsersModule.php',
     'Devlens\\Dashboard\\Sections\\WordPressModule' => $baseDir . '/src/Dashboard/Sections/WordPressModule.php',
+    'Devlens\\Dashboard\\UploadsSection' => $baseDir . '/src/Dashboard/UploadsSection.php',
     'Devlens_Common\\Hooks' => $baseDir . '/common/Hooks.php',
 );
