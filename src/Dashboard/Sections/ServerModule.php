@@ -27,13 +27,6 @@ class ServerModule extends AbstractModule {
 
 		$env_data = self::get_server_data(); // Get the server data.
 
-		// $content = '<ul class="admin-tools-dashboard-widget_list">'; // Initialize content variable.
-		// foreach ( $env_data as $key => $value ) {
-		// Build the content string with server data.
-		// $content .= '<li><strong>' . esc_html( $key ) . ':</strong> ' . esc_html( $value ) . '</li>';
-		// }
-		// $content .= '</ul>'; // Close the unordered list.
-
 		$section = new Section(
 			title: 'Server Data',
 			data: $env_data, // Content will be generated in the render_section method.

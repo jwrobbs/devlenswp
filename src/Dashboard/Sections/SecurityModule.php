@@ -78,11 +78,7 @@ class SecurityModule extends AbstractModule {
 			'value' => $autoupdate_data['plugins'],
 			'score' => false,
 		);
-		$data[] = array(
-			'label' => 'Theme Auto Updates',
-			'value' => $autoupdate_data['themes'],
-			'score' => false,
-		);
+		
 
 		return $data;
 	}

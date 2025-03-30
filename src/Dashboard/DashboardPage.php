@@ -37,6 +37,12 @@ class DashboardPage {
 				array(),
 				'1.0'
 			);
+			wp_enqueue_style(
+				'font-awesome',
+				'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css',
+				array(),
+				null
+			);
 		}
 	}
 
@@ -78,8 +84,10 @@ class DashboardPage {
 		echo wp_kses_post( $html );
 		echo '</div><!-- end of wrapper -->'; // Close wrap.
 
+		ServerSection::render_section();
 		DebugLogSection::render_section();
 		UploadsSection::render_section();
+		DBSection::render_section();
 	}
 
 	/**

@@ -26,12 +26,5 @@ class Hooks {
 	 */
 	public static function init() {
 		DashboardPage::init();
-
-		ServerModule::init();
-		WordPressModule::init();
-		UsersModule::init();
-		PluginsModule::init();
-		ThemesModule::init();
-		SecurityModule::init();
 	}
 }

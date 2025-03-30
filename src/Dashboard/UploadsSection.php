@@ -37,7 +37,7 @@ class UploadsSection {
 		$file_list_html .= '</ul>';
 
 		$html = <<<HTML
-		<div class="uploads-section">
+		<div class="uploads-section section">
 			<h3>Uploads Data</h3>
 			<div class='content'>
 				<div class='overview'>

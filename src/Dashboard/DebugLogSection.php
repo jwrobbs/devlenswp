@@ -45,7 +45,7 @@ class DebugLogSection {
 		}
 
 		$html = <<<HTML
-		<div class="debug-log-section">
+		<div class="debug-log-section section">
 			<h3>Debug Log Data</h3>
 			<div class='content'>
 				<div class='overview'>

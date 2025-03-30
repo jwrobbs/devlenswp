@@ -26,14 +26,47 @@ $font-size: 16px;
 	}
 }
 
+.section,
 .debug-log-section,
-.uploads-section {
+.uploads-section,
+.db-section {
 	font-size: $font-size;
 
 	.content {
-		display: flex;
-		> *:not(:last-child) {
-			margin-right: $font-size * 2;
+		display: grid;
+		grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+		gap: 10px;
+	}
+}
+
+.server-section {
+	ul {
+		padding-left: $font-size * 1.5;
+
+		li:before {
+			display: inline-block;
+			margin-right: 8px;
+			font-size: 1em;
+			line-height: 18.2px;
+			font-weight: 900;
+			font-family: "Font Awesome 6 Free";
+		}
+		.good:before {
+			content: "\f111";
+			font-size: 1em;
+			color: #4caf50;
+		}
+		.warn:before {
+			content: "\f071";
+			color: #ff9800;
+		}
+		.alert:before {
+			content: "\f714";
+			color: #c30010;
+		}
+		.info:before {
+			content: "\f219";
+			color: #0044aa;
 		}
 	}
 }
